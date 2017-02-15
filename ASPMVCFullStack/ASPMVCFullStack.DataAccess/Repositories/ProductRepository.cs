@@ -1,5 +1,6 @@
 ﻿using ASPMVCFullStack.DataAccess.Base;
 using ASPMVCFullStack.Domain;
+using ASPMVCFullStack.Domain.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace ASPMVCFullStack.DataAccess.Repositories
     {
         public ProductRepository(UnitOfWork unitOfWork) : base(unitOfWork)
         {
+        }
+        
+        public Product GetByName(string name)
+        {
+            MyContext context = Context as MyContext;
+            return context.Products.FirstOrDefault(n => n.Name.Equals(name));
         }
     }
 }
